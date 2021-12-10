@@ -2,5 +2,34 @@
 {% block title %} <title>{{title}}</title> {% endblock title %}
 
 {% block content %}
-<h1 class="text-center">{{ title }}</h1>
+<h1 class="text-center my-3">{{ title }}</h1>
+
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.email.label() }}
+        {% if form.email.errors %}
+        {{ form.email(class='form-control is-invalid') }}
+        {% for error in form.email.errors %}
+            <small class="text-danger">{{ error }}</small>
+        {% endfor %}
+        {% else %}
+        {{ form.email(class='form-control') }}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.password.label() }}
+        {% if form.password.errors %}
+        {{ form.password(class='form-control is-invalid') }}
+        {% for error in form.password.errors %}
+            <small class="text-danger">{{ error }}</small>
+        {% endfor %}
+        {% else %}
+        {{ form.password(class='form-control') }}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.submit(class='btn btn-success btn-block') }}
+    </div>
+</form>
 {% endblock content %}
